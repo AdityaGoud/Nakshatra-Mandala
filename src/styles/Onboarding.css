@@ -1,0 +1,27 @@
+/* src/styles/Onboarding.css */
+
+/**
+ * Onboarding.css
+ *
+ * Optional, feature-specific styling for the birth details screen.
+ * Most base styles (layout, panel, typography, buttons, inputs) are
+ * defined in app.css. Use this file to:
+ * - Override or extend styles only for onboarding.
+ * - Add animations or illustrations specific to the first screen.
+ */
+
+/* Example: subtle variation of the panel when used for onboarding */
+.onboarding-panel {
+    /* You can apply this class to info-panel in OnboardingContainer if needed */
+    /* For now we just leave a placeholder comment. */
+}
+
+/* Example: helper text style under the form button */
+.onboarding-helper-text {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(229, 231, 235, 0.7);
+    text-align: center;
+}
+
+/* Add more onboarding-only styles here in the future. */
