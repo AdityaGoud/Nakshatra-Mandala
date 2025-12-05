@@ -18,7 +18,8 @@
  *   API is ready.
  */
 
-const BASE_URL = "http://localhost:4000"; // TODO: update when backend is ready
+const BASE_URL = "http://localhost:4000";
+// Version1: update when backend is ready
 
 /**
  * normalizeChartResponse
@@ -43,7 +44,7 @@ const BASE_URL = "http://localhost:4000"; // TODO: update when backend is ready
  * @returns {any} chartData compatible object
  */
 function normalizeChartResponse(apiData) {
-    // TODO: adapt this mapping once you know the actual backend format.
+    // version1: adapt this mapping once you know the actual backend format.
 
     // Example of a minimal mapping:
     return {

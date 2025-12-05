@@ -54,7 +54,7 @@ const OnboardingContainer = ({onChartReady}) => {
         setIsSubmitting(true);
 
         try {
-            // TODO: Replace mock with real API call using services/astrologyApi.js
+            // version1: Replace mock with real API call using services/astrologyApi.js
             // const chartResponse = await calculateNatalChart(values);
 
             // MOCK: Simple chartData structure for now
