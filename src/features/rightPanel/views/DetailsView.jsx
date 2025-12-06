@@ -1,7 +1,8 @@
 // src/features/rightPanel/views/DetailsView.jsx
 import React from "react";
 import { MELAKARTA_RAGAS, NAKSHATRAS, RASHIS } from "../../../data/mandalaData";
-import { getPlanetDignity, getHouseNumber } from "../../../services/mappings";
+import { getPlanetDignity, getHouseNumber, getNakshatraInfoFromDegree } from "../../../services/mappings";
+import { getDashaForNakshatra } from "../../../data/dashaData";
 
 const DetailsView = ({ hoverSelection, chartData }) => {
     if (!hoverSelection) {
@@ -23,6 +24,11 @@ const DetailsView = ({ hoverSelection, chartData }) => {
         const rashiIndex = Math.floor(degree / 30) % 12;
         const rashiName = RASHIS[rashiIndex];
 
+        // Get Nakshatra info
+        const nakshatraInfo = getNakshatraInfoFromDegree(degree);
+        const dashaInfo = getDashaForNakshatra(nakshatraInfo.index);
+        const nakshatraLord = dashaInfo?.lord || "Unknown";
+
         let statusColor = "#fff";
         if (dignity === "Exalted") statusColor = "#4ade80";
         if (dignity === "Debilitated") statusColor = "#f87171";
@@ -32,58 +38,99 @@ const DetailsView = ({ hoverSelection, chartData }) => {
 
         return (
             <div className="details-view planet-layout">
-                {/* Top Header with Fixed Image */}
+                {/* Top Header with Planet Name and Icon */}
                 <div className="planet-header">
                     <div className="planet-info-top">
                         <h2 className="planet-name">{name}</h2>
                         <span className="degree-pill">{degree.toFixed(2)}°</span>
                     </div>
-                    <div className="icon-frame" style={{
-                        maxWidth: '600px',  // Set your desired max width
-                        overflow: 'hidden'
-                    }}>
+                    <div className="icon-frame">
                         <img
                             src={iconSrc}
                             alt={name}
                             style={{
                                 width: '100%',
                                 height: '100%',
-                                objectFit: 'contain'  // Key property: fits image without cropping
+                                objectFit: 'contain'
                             }}
                         />
                     </div>
                 </div>
 
-                {/* Grid Stats */}
+                {/* PRIMARY STATS GRID - House, Rashi, Dignity, Navamsa */}
                 <div className="stats-grid">
-                    {/* 1. HOUSE: Changed structure slightly for horizontal box look */}
-                    <div className="stat-card house-card-row">
-                        <div className="house-box-label">House</div>
-                        <div className="house-box-value">{houseNum}</div>
+                    <div className="stat-card stat-primary">
+                        <span className="label">House</span>
+                        <div className="value">{houseNum}</div>
+                        <span className="sub">Position</span>
                     </div>
 
-                    {/* 2. Other cards remain the same... */}
-                    <div className="stat-card">
+                    <div className="stat-card stat-primary">
                         <span className="label">Rashi</span>
                         <div className="value text-sm">{rashiName}</div>
                         <span className="sub">Sign</span>
                     </div>
-                    <div className="stat-card">
+
+                    <div className="stat-card stat-primary">
                         <span className="label">Dignity</span>
                         <div className="value text-sm" style={{color: statusColor}}>{dignity}</div>
                         <span className="sub">Status</span>
                     </div>
-                    <div className="stat-card">
-                        <span className="label">Relation</span>
-                        <div className="value text-sm">Neutral</div>
-                        <span className="sub">Nature</span>
+
+                    <div className="stat-card stat-primary">
+                        <span className="label">Navamsa</span>
+                        <div className="value text-sm">N/A</div>
+                        <span className="sub">D-9 Rashi</span>
                     </div>
                 </div>
 
-                {/* Description */}
+                {/* NAKSHATRA SECTION */}
+                <div className="section-divider"></div>
+                <div className="section-header">
+                    <div className="section-title">Nakshatra Details</div>
+                </div>
+
+                <div className="nakshatra-info">
+                    <div className="nakshatra-name-box">
+                        <span className="nakshatra-label">Lunar Mansion</span>
+                        <h3 className="nakshatra-name">{nakshatraInfo.name}</h3>
+                        <span className="nakshatra-number">#{nakshatraInfo.number}</span>
+                    </div>
+                </div>
+
+                <div className="lord-card">
+                    <span className="lord-label">Nakshatra Lord</span>
+                    <div className="lord-badge">{nakshatraLord}</div>
+                </div>
+
+                {/* ADVANCED DETAILS SECTION */}
+                <div className="section-divider"></div>
+                <div className="advanced-grid">
+                    <div className="detail-box">
+                        <span className="detail-label">Awastha</span>
+                        <div className="detail-value">API Pending</div>
+                        <span className="detail-sub">State</span>
+                    </div>
+
+                    <div className="detail-box">
+                        <span className="detail-label">Sthan</span>
+                        <div className="detail-value">API Pending</div>
+                        <span className="detail-sub">Placement</span>
+                    </div>
+
+                    <div className="detail-box">
+                        <span className="detail-label">Aspects</span>
+                        <div className="detail-value">-</div>
+                        <span className="detail-sub">Grahas</span>
+                    </div>
+                </div>
+
+                {/* INTERPRETATION SUMMARY */}
                 <div className="planet-desc">
-                    {name} is in the <strong>{houseNum}<sup>th</sup> House</strong> ({rashiName}).
-                    It is currently {dignity}.
+                    <strong>{name}</strong> resides in <strong>{houseNum}<sup>th</sup> House</strong> ({rashiName})
+                    within <strong>{nakshatraInfo.name}</strong> Nakshatra,
+                    ruled by <strong>{nakshatraLord}</strong>.
+                    Currently <strong>{dignity}</strong>.
                 </div>
             </div>
         );
