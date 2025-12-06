@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>72 Melakarta Raga Hierarchy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #e0e0ff;
+            padding: 20px;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .level { margin: 20px 0; border: 2px solid #4a4a8a; padding: 15px; border-radius: 8px; }
+        .level-header {
+            background: #2a2a4a;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .level-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            margin-top: 10px;
+        }
+        .level.expanded .level-content { max-height: 5000px; }
+        .toggle { font-size: 18px; }
+        .chakra { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 15px 0; }
+        .item { background: #333350; padding: 12px; border-radius: 4px; border-left: 4px solid #6a4c93; }
+        ul { margin: 8px 0; padding-left: 20px; }
+        li { margin: 5px 0; }
+        .swara { color: #ffaa88; font-weight: bold; font-size: 1.1em; }
+        .highlight { background: #4a2a6a; padding: 12px; border-radius: 4px; margin: 10px 0; border-left: 4px solid #ffaa88; }
+        .arohana { color: #88ff88; }
+        .avarohana { color: #ff8888; }
+        .scale-box { background: #2a3a2a; padding: 10px; border-radius: 4px; margin: 5px 0; font-family: monospace; }
+        .explanation { background: #3a3a5a; padding: 12px; border-radius: 4px; margin: 12px 0; font-size: 0.95em; line-height: 1.7; border-left: 3px solid #88aaff; }
+        .key-rule { background: #4a3a3a; padding: 10px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #ff8888; font-size: 0.9em; }
+        .formula-box { background: #2a4a2a; padding: 10px; border-radius: 4px; margin: 10px 0; font-family: monospace; font-size: 1.05em; text-align: center; border: 2px solid #88ff88; }
+        .notation-table { background: #2a2a3a; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .notation-table table { width: 100%; border-collapse: collapse; }
+        .notation-table th { background: #4a4a6a; padding: 8px; text-align: left; }
+        .notation-table td { padding: 6px; border-bottom: 1px solid #4a4a6a; }
+        .same-key { color: #ff8888; font-weight: bold; }
+    </style>
+</head>
+<body>
+<h1>🎵 72 Melakarta Raga System - Complete Hierarchy</h1>
+
+<!-- LEVEL 0: AROHANA & AVAROHANA -->
+<div class="level expanded" data-level="0">
+    <div class="level-header" onclick="toggle(this)">
+        <span>🎼 LEVEL 0: Arohana (↑) & Avarohana (↓)</span>
+        <span class="toggle">▲</span>
+    </div>
+    <div class="level-content">
+        <div class="highlight">
+            <strong>Ascending (Arohana):</strong> Sa Re Ga Ma Pa Dha Ni Sa <span class="arohana">(↑ UP)</span><br>
+            <strong>Descending (Avarohana):</strong> Sa Ni Dha Pa Ma Ga Re Sa <span class="avarohana">(↓ DOWN)</span>
+        </div>
+        <div class="scale-box">
+            Arohana: S R G M P D N S<br>
+            Avarohana: S' N D P M G R S
+        </div>
+    </div>
+</div>
+
+<!-- LEVEL 1: 7 NOTES (SWARAS) -->
+<div class="level expanded" data-level="1">
+    <div class="level-header" onclick="toggle(this)">
+        <span>🎼 LEVEL 1: 7 Basic Notes (Swaras)</span>
+        <span class="toggle">▲</span>
+    </div>
+    <div class="level-content">
+        <div class="highlight">
+            <strong>7 Swaras:</strong> <span class="swara">Sa Re Ga Ma Pa Dha Ni</span><br>
+            <span class="swara">Sa(Shadja) - Re(Rishabha) - Ga(Gandhara) - Ma(Madhyama) - Pa(Panchama) - Dha(Dhaivata) - Ni(Nishada)</span>
+        </div>
+        <div class="explanation">
+            <strong>Why only 7 swaras?</strong> The octave (12 semitones/keys) is divided into 7 musical note names (swaras). Each swara can sit on different keys, creating variations.
+        </div>
+    </div>
+</div>
+
+<!-- LEVEL 2: SWARA VARIATIONS -->
+<div class="level expanded" data-level="2">
+    <div class="level-header" onclick="toggle(this)">
+        <span>🎼 LEVEL 2: Swara Variations (Understanding the Combos)</span>
+        <span class="toggle">▲</span>
+    </div>
+    <div class="level-content">
+
+        <div class="explanation">
+            <strong>🔑 FUNDAMENTAL RULE:</strong> In Melakarta ragas, <strong>Sa (Shadja)</strong> and <strong>Pa (Panchama)</strong> are <strong>FIXED</strong> and never change. They are called <strong>Achala Swaras</strong> (immutable notes). Only the other 5 swaras have variations.
+        </div>
+
+        <div class="notation-table">
+            <strong>🎹 The 12 Keys (Swarasthanas) in one octave:</strong>
+            <table>
+                <tr>
+                    <th>Key Position</th>
+                    <th>Swara Name(s)</th>
+                    <th>Notation</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Shadja (fixed)</td>
+                    <td><strong>S</strong></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Shuddha Rishabha</td>
+                    <td><strong>R1</strong></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Chatusruti Rishabha <span class="same-key">OR</span> Shuddha Gandhara</td>
+                    <td><strong>R2 = G1</strong> (same key!)</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Shatsruti Rishabha <span class="same-key">OR</span> Sadharana Gandhara</td>
+                    <td><strong>R3 = G2</strong> (same key!)</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Antara Gandhara</td>
+                    <td><strong>G3</strong></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Shuddha Madhyama</td>
+                    <td><strong>M1</strong></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Prati Madhyama (Tivra)</td>
+                    <td><strong>M2</strong></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Panchama (fixed)</td>
+                    <td><strong>P</strong></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Shuddha Dhaivata</td>
+                    <td><strong>D1</strong></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Chatusruti Dhaivata <span class="same-key">OR</span> Shuddha Nishada</td>
+                    <td><strong>D2 = N1</strong> (same key!)</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Shatsruti Dhaivata <span class="same-key">OR</span> Kaisiki Nishada</td>
+                    <td><strong>D3 = N2</strong> (same key!)</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Kakali Nishada</td>
+                    <td><strong>N3</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="key-rule">
+            <strong>🚫 WHY WE CAN'T USE ALL COMBINATIONS:</strong><br><br>
+            <strong>Rule 1:</strong> Each swara name (Re, Ga, Ma, Dha, Ni) can appear only ONCE in a raga. You cannot use R1 and R2 together.<br><br>
+            <strong>Rule 2:</strong> The same keyboard key cannot represent two different swaras in the same raga. Notice how:<br>
+            • Key 3 = R2 or G1 (both names, same sound)<br>
+            • Key 4 = R3 or G2 (both names, same sound)<br>
+            • Key 10 = D2 or N1 (both names, same sound)<br>
+            • Key 11 = D3 or N2 (both names, same sound)<br><br>
+            <strong>Rule 3:</strong> Ga must always be HIGHER in pitch than Re, and Ni must always be HIGHER than Dha.
+        </div>
+
+        <div class="chakra">
+            <div class="item">
+                <strong>📍 Sa (1 option only):</strong>
+                <ul>
+                    <li><strong>S:</strong> Shadja (Fixed at Key 1)</li>
+                </ul>
+                <div style="margin-top:8px; font-size:0.9em; color:#88ff88;">
+                    ✓ Sa is always fixed. No variations.
+                </div>
+            </div>
+
+            <div class="item">
+                <strong>📍 Pa (1 option only):</strong>
+                <ul>
+                    <li><strong>P:</strong> Panchama (Fixed at Key 8)</li>
+                </ul>
+                <div style="margin-top:8px; font-size:0.9em; color:#88ff88;">
+                    ✓ Pa is always fixed. No variations.
+                </div>
+            </div>
+        </div>
+
+        <div class="chakra">
+            <div class="item">
+                <strong>🎹 Re-Ga: Only 6 Valid Combinations</strong>
+                <div style="margin-top:8px; font-size:0.9em; background:#2a2a3a; padding:8px; border-radius:4px;">
+                    Re has 3 types: R1 (key 2), R2 (key 3), R3 (key 4)<br>
+                    Ga has 3 types: G1 (key 3), G2 (key 4), G3 (key 5)<br>
+                    <span class="same-key">Problem: R2 and G1 share key 3. R3 and G2 share key 4!</span>
+                </div>
+                <ul>
+                    <li>✓ <strong>R1-G1:</strong> keys 2-3 (Valid)</li>
+                    <li>✓ <strong>R1-G2:</strong> keys 2-4 (Valid)</li>
+                    <li>✓ <strong>R1-G3:</strong> keys 2-5 (Valid)</li>
+                    <li>✗ <strong>R2-G1:</strong> both at key 3 <span class="same-key">(SAME KEY!)</span></li>
+                    <li>✓ <strong>R2-G2:</strong> keys 3-4 (Valid)</li>
+                    <li>✓ <strong>R2-G3:</strong> keys 3-5 (Valid)</li>
+                    <li>✗ <strong>R3-G1:</strong> Ga lower than Re <span class="same-key">(RULE VIOLATION!)</span></li>
+                    <li>✗ <strong>R3-G2:</strong> both at key 4 <span class="same-key">(SAME KEY!)</span></li>
+                    <li>✓ <strong>R3-G3:</strong> keys 4-5 (Valid)</li>
+                </ul>
+                <div style="margin-top:8px; font-size:0.9em; color:#88ff88;">
+                    <strong>Result: Only 6 valid Re-Ga pairs</strong> (R1-G1, R1-G2, R1-G3, R2-G2, R2-G3, R3-G3)
+                </div>
+            </div>
+
+            <div class="item">
+                <strong>🎹 Dha-Ni: Only 6 Valid Combinations</strong>
+                <div style="margin-top:8px; font-size:0.9em; background:#2a2a3a; padding:8px; border-radius:4px;">
+                    Dha has 3 types: D1 (key 9), D2 (key 10), D3 (key 11)<br>
+                    Ni has 3 types: N1 (key 10), N2 (key 11), N3 (key 12)<br>
+                    <span class="same-key">Problem: D2 and N1 share key 10. D3 and N2 share key 11!</span>
+                </div>
+                <ul>
+                    <li>✓ <strong>D1-N1:</strong> keys 9-10 (Valid)</li>
+                    <li>✓ <strong>D1-N2:</strong> keys 9-11 (Valid)</li>
+                    <li>✓ <strong>D1-N3:</strong> keys 9-12 (Valid)</li>
+                    <li>✗ <strong>D2-N1:</strong> both at key 10 <span class="same-key">(SAME KEY!)</span></li>
+                    <li>✓ <strong>D2-N2:</strong> keys 10-11 (Valid)</li>
+                    <li>✓ <strong>D2-N3:</strong> keys 10-12 (Valid)</li>
+                    <li>✗ <strong>D3-N1:</strong> Ni lower than Dha <span class="same-key">(RULE VIOLATION!)</span></li>
+                    <li>✗ <strong>D3-N2:</strong> both at key 11 <span class="same-key">(SAME KEY!)</span></li>
+                    <li>✓ <strong>D3-N3:</strong> keys 11-12 (Valid)</li>
+                </ul>
+                <div style="margin-top:8px; font-size:0.9em; color:#88ff88;">
+                    <strong>Result: Only 6 valid Dha-Ni pairs</strong> (D1-N1, D1-N2, D1-N3, D2-N2, D2-N3, D3-N3)
+                </div>
+            </div>
+
+            <div class="item">
+                <strong>🎹 Ma: 2 Options</strong>
+                <ul>
+                    <li><strong>M1:</strong> Shuddha Madhyama (key 6)</li>
+                    <li><strong>M2:</strong> Prati/Tivra Madhyama (key 7)</li>
+                </ul>
+                <div style="margin-top:8px; font-size:0.9em; color:#88ff88;">
+                    ✓ Ma has 2 distinct keys with no overlaps. Both are always valid choices.
+                </div>
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <strong>MELAKARTA FORMULA:</strong><br>
+            1 (Sa) × 6 (Re-Ga pairs) × 2 (Ma) × 1 (Pa) × 6 (Dha-Ni pairs) = 72 Melakartas
+        </div>
+
+        <div class="explanation">
+            <strong>📚 Final Summary:</strong> We don't get 9 Re-Ga combos (3×3) or 9 Dha-Ni combos because certain keyboard keys are shared between note names. The R2=G1, R3=G2, D2=N1, and D3=N2 overlaps reduce our choices from 9 down to 6 valid combinations for each pair. This is the mathematical foundation of the 72 Melakarta system.
+        </div>
+    </div>
+</div>
+
+<!-- LEVEL 3: 72 MELAKARTAS -->
+<div class="level" data-level="3">
+    <div class="level-header" onclick="toggle(this)">
+        <span>🎼 LEVEL 3: 72 Melakarta Ragas (Parent Ragas)</span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="level-content">
+        <div class="explanation">
+            The 72 Melakartas are divided into 2 major groups based on Madhyama, and further organized into 12 Chakras (groups of 6 ragas each).
+        </div>
+        <div class="chakra">
+            <div class="item">
+                <strong>M1 Group (1-36): Shuddha Madhyama Ragas</strong>
+                <ul>
+                    <li><strong>1.</strong> Kanakangi</li>
+                    <li><strong>15.</strong> Mayamalavagoula</li>
+                    <li><strong>22.</strong> Kharaharapriya</li>
+                    <li><strong>28.</strong> Harikambhoji</li>
+                    <li><strong>29.</strong> Shankarabharanam (Dheerashankarabharanam)</li>
+                    <li>... (31 more)</li>
+                </ul>
+            </div>
+            <div class="item">
+                <strong>M2 Group (37-72): Prati Madhyama Ragas</strong>
+                <ul>
+                    <li><strong>37.</strong> Salagam</li>
+                    <li><strong>51.</strong> Kamavardhani</li>
+                    <li><strong>58.</strong> Hemavathi</li>
+                    <li><strong>65.</strong> Kalyani (Mechakalyani)</li>
+                    <li>... (32 more)</li>
+                </ul>
+            </div>
+            <div class="item">
+                <strong>12 Chakras (6 ragas each):</strong>
+                <ul>
+                    <li>1-6: Indu Chakra</li>
+                    <li>7-12: Netra Chakra</li>
+                    <li>13-18: Agni Chakra</li>
+                    <li>19-24: Veda Chakra</li>
+                    <li>25-30: Bana Chakra</li>
+                    <li>31-36: Rutu Chakra</li>
+                    <li>37-42: Rishi Chakra</li>
+                    <li>43-48: Vasu Chakra</li>
+                    <li>49-54: Brahma Chakra</li>
+                    <li>55-60: Disi Chakra</li>
+                    <li>61-66: Rudra Chakra</li>
+                    <li>67-72: Aditya Chakra</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LEVEL 4: JANYA RAGAS -->
+<div class="level" data-level="4">
+    <div class="level-header" onclick="toggle(this)">
+        <span>🎼 LEVEL 4: Janya Ragas (Derived Ragas - Thousands!)</span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="level-content">
+        <div class="explanation">
+            Janya ragas are derived from the 72 Melakartas by omitting notes or adding variations. There are thousands of janya ragas!
+        </div>
+        <div class="chakra">
+            <div class="item">
+                <strong>By Number of Notes:</strong>
+                <ul>
+                    <li><strong>Sampurna:</strong> 7 notes in arohana and avarohana</li>
+                    <li><strong>Shadava:</strong> 6 notes (one note missing)</li>
+                    <li><strong>Audava:</strong> 5 notes (two notes missing)</li>
+                </ul>
+            </div>
+            <div class="item">
+                <strong>By Purity (Swara Origin):</strong>
+                <ul>
+                    <li><strong>Upanga:</strong> Uses only notes from the parent Melakarta</li>
+                    <li><strong>Bhashanga:</strong> Borrows extra notes from other Melakartas</li>
+                </ul>
+            </div>
+            <div class="item">
+                <strong>Popular Examples:</strong>
+                <ul>
+                    <li><strong>Mohana</strong> (Audava) from Shankarabharanam (29)</li>
+                    <li><strong>Hindolam</strong> (Audava) from Natabhairavi (20)</li>
+                    <li><strong>Durga</strong> (Audava) from Shankarabharanam (29)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NIGHT RAGAS -->
+<div class="level" data-level="5">
+    <div class="level-header" onclick="toggle(this)">
+        <span>🌙 LEVEL 5: Night Ragas → Their Melakarta Parents</span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="level-content">
+        <div class="explanation">
+            Night ragas are janya ragas traditionally performed after sunset. Each is derived from one of the 72 Melakartas.
+        </div>
+        <div class="chakra">
+            <div class="item">
+                <strong>Hindustani Night Ragas:</strong>
+                <ul>
+                    <li><strong>Asa Bhairav</strong> → 15 Mayamalavagoula</li>
+                    <li><strong>Bageshri</strong> → 22 Kharaharapriya</li>
+                    <li><strong>Des</strong> → 28 Harikambhoji</li>
+                    <li><strong>Durga</strong> → 29 Shankarabharanam</li>
+                    <li><strong>Madhu Kauns</strong> → 58 Hemavathi</li>
+                    <li><strong>Darbari Kanada</strong> → 22 Kharaharapriya</li>
+                </ul>
+            </div>
+            <div class="item">
+                <strong>More Night Ragas:</strong>
+                <ul>
+                    <li><strong>Alhaiya Bilawal</strong> → 29 Shankarabharanam</li>
+                    <li><strong>Hemant</strong> → 29 Shankarabharanam</li>
+                    <li><strong>Hansadhwani</strong> → 29 Shankarabharanam</li>
+                    <li><strong>Jhinjhoti</strong> → 28 Harikambhoji</li>
+                    <li><strong>Kamboji Kanada</strong> → 28 Harikambhoji</li>
+                    <li><strong>Yaman/Kalyani</strong> → 65 Kalyani</li>
+                </ul>
+            </div>
+        </div>
+        <div class="highlight">
+            <strong>Key Insight:</strong> Night ragas are NOT a separate level—they are janya ragas (Level 4) that are traditionally associated with nighttime performance for their calming, introspective moods.
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggle(header) {
+        const level = header.parentElement;
+        const icon = header.querySelector('.toggle');
+
+        level.classList.toggle('expanded');
+        icon.textContent = level.classList.contains('expanded') ? '▲' : '▼';
+    }
+</script>
+</body>
+</html>

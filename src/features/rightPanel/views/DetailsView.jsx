@@ -57,10 +57,6 @@ const DetailsView = ({ hoverSelection, chartData }) => {
                 {/* Grid Stats */}
                 <div className="stats-grid">
                     {/* 1. HOUSE: Changed structure slightly for horizontal box look */}
-                    <div className="stat-card house-card-row">
-                        <div className="house-box-label">House</div>
-                        <div className="house-box-value">{houseNum}</div>
-                    </div>
 
                     {/* 2. Other cards remain the same... */}
                     <div className="stat-card">
