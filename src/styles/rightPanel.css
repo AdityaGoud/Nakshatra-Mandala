@@ -1,9 +1,9 @@
-/* src/styles/rightPanel.css - Cosmic Theme Visual Report Design */
+/* src/styles/rightPanel.css - Table-Style Detailed Report Layout */
 
 .details-view {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 0.75rem;
     width: 100%;
     height: 100%;
 }
@@ -15,27 +15,30 @@
 .planet-layout {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 /* ============================================
-   HEADER WITH STRENGTH INDICATOR
+   HEADER SECTION - Simple Centered Layout
    ============================================ */
 
-.planet-header-with-strength {
+.planet-header-simple {
     display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(125, 211, 252, 0.2);
+    text-align: center;
 }
 
-.planet-image-section {
-    position: relative;
-    flex-shrink: 0;
+.planet-image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.icon-frame {
+.icon-frame-simple {
     width: 100px;
     height: 100px;
     background: linear-gradient(135deg, rgba(125, 211, 252, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
@@ -50,46 +53,26 @@
     transition: all 0.3s ease;
 }
 
-.icon-frame:hover {
+.icon-frame-simple:hover {
     box-shadow: 0 8px 32px rgba(125, 211, 252, 0.25),
                 inset 0 0 16px rgba(125, 211, 252, 0.1);
     transform: scale(1.05);
 }
 
-.icon-frame img {
+.icon-frame-simple img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-/* Strength Ring Overlay */
-.strength-ring-overlay {
-    position: absolute;
-    bottom: -8px;
-    right: -8px;
-    z-index: 10;
-}
-
-.strength-indicator-container {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.strength-indicator-svg {
-    filter: drop-shadow(0 4px 12px rgba(125, 211, 252, 0.3));
-}
-
-/* Header Text Section */
-.planet-header-text {
+.planet-header-text-simple {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    flex: 1;
-    justify-content: center;
+    gap: 0.4rem;
+    align-items: center;
 }
 
-.planet-name {
+.planet-name-simple {
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
@@ -99,7 +82,7 @@
     background-clip: text;
 }
 
-.degree-pill {
+.degree-pill-simple {
     font-family: monospace;
     font-size: 0.85rem;
     color: #7dd3fc;
@@ -108,207 +91,111 @@
     border-radius: 20px;
     border: 1px solid rgba(125, 211, 252, 0.3);
     display: inline-block;
-    width: fit-content;
 }
 
 /* ============================================
-   DETAIL CARDS GRID - PRIMARY (ROW 1)
+   STRENGTH BAR SECTION
    ============================================ */
 
-.details-card-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+.strength-bar-section {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.15);
+}
+
+.strength-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.strength-bar-background {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(125, 211, 252, 0.25);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.strength-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7dd3fc 0%, #a78bfa 100%);
+    border-radius: 20px;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
+}
+
+.strength-bar-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    letter-spacing: 0.4px;
+}
+
+.strength-percentage {
+    color: #7dd3fc;
+    font-weight: 700;
+    margin-left: 0.3rem;
+}
+
+/* ============================================
+   DETAILS TABLE - Grid Layout with Rows
+   ============================================ */
+
+.details-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     width: 100%;
 }
 
-.details-row-1 {
-    gap: 0.8rem;
-}
-
-.details-row-2 {
-    gap: 0.8rem;
-}
-
-/* Base Detail Card */
-.detail-card {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.75rem;
-    border-radius: 14px;
-    border: 1px solid rgba(125, 211, 252, 0.2);
-    background: linear-gradient(135deg, rgba(125, 211, 252, 0.06) 0%, rgba(168, 85, 247, 0.06) 100%);
+.detail-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.04) 0%, rgba(168, 85, 247, 0.04) 100%);
+    border: 1px solid rgba(125, 211, 252, 0.15);
+    border-radius: 10px;
     transition: all 0.2s ease;
-    cursor: default;
-    min-height: 70px;
 }
 
-.detail-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(125, 211, 252, 0.35);
-    box-shadow: 0 6px 16px rgba(125, 211, 252, 0.12);
-    background: linear-gradient(135deg, rgba(125, 211, 252, 0.12) 0%, rgba(168, 85, 247, 0.12) 100%);
+.detail-row:hover {
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+    border-color: rgba(125, 211, 252, 0.25);
+    box-shadow: 0 2px 8px rgba(125, 211, 252, 0.1);
 }
 
-/* Card Icon */
-.card-icon {
-    font-size: 1.6rem;
-    flex-shrink: 0;
-    opacity: 0.9;
-}
-
-/* Card Content */
-.card-content {
+.row-item {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.3rem;
+    padding: 0.4rem;
 }
 
-.card-value {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.2;
-}
-
-.card-label {
+.row-item-label {
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.4px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.55);
     font-weight: 500;
 }
 
-/* PRIMARY CARD VARIANTS */
-
-.detail-card--primary {
-    border-top: 3px solid transparent;
-    min-height: 75px;
-}
-
-.detail-card--primary .card-value {
-    font-size: 1.2rem;
-}
-
-.detail-card--house {
-    border-top-color: rgba(125, 211, 252, 0.5);
-}
-
-.detail-card--house:hover {
-    border-top-color: #7dd3fc;
-    box-shadow: 0 6px 16px rgba(125, 211, 252, 0.2);
-}
-
-.detail-card--rashi {
-    border-top-color: rgba(59, 130, 246, 0.5);
-}
-
-.detail-card--rashi:hover {
-    border-top-color: #3b82f6;
-    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
-}
-
-.detail-card--dignity {
-    border-top-color: rgba(168, 85, 247, 0.5);
-}
-
-.detail-card--dignity:hover {
-    border-top-color: #a78bfa;
-    box-shadow: 0 6px 16px rgba(168, 85, 247, 0.2);
-}
-
-.detail-card--nakshatra {
-    border-top-color: rgba(139, 92, 246, 0.5);
-}
-
-.detail-card--nakshatra:hover {
-    border-top-color: #8b5cf6;
-    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.2);
-}
-
-/* SECONDARY CARD VARIANTS */
-
-.detail-card--secondary {
-    min-height: 65px;
-}
-
-.detail-card--secondary .card-value {
+.row-item-value {
     font-size: 0.95rem;
-}
-
-.detail-card--secondary .card-icon {
-    font-size: 1.4rem;
-}
-
-.detail-card--lord {
-    border-left: 3px solid rgba(99, 102, 241, 0.5);
-}
-
-.detail-card--lord:hover {
-    border-left-color: #6366f1;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
-}
-
-.detail-card--navamsa {
-    border-left: 3px solid rgba(236, 72, 153, 0.5);
-}
-
-.detail-card--navamsa:hover {
-    border-left-color: #ec4899;
-    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
-}
-
-.detail-card--awastha {
-    border-left: 3px solid rgba(244, 63, 94, 0.5);
-}
-
-.detail-card--awastha:hover {
-    border-left-color: #f43f5e;
-    box-shadow: 0 4px 12px rgba(244, 63, 94, 0.15);
-}
-
-.detail-card--sthan {
-    border-left: 3px solid rgba(249, 115, 22, 0.5);
-}
-
-.detail-card--sthan:hover {
-    border-left-color: #f97316;
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
-}
-
-/* ============================================
-   INTERPRETATION SUMMARY BOX
-   ============================================ */
-
-.interpretation-box {
-    background: linear-gradient(135deg, rgba(125, 211, 252, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
-    border: 1px solid rgba(125, 211, 252, 0.2);
-    border-left: 3px solid rgba(125, 211, 252, 0.5);
-    border-radius: 14px;
-    padding: 0.9rem;
-    margin-top: 0.5rem;
-}
-
-.interpretation-title {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: rgba(125, 211, 252, 0.9);
     font-weight: 600;
-    margin-bottom: 0.4rem;
+    color: #fff;
+    line-height: 1.3;
 }
 
-.interpretation-text {
+.row-item-value.pending {
+    color: rgba(255, 255, 255, 0.65);
+    font-style: italic;
+    font-weight: 400;
     font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--card-text-muted);
-    margin: 0;
-}
-
-.interpretation-text strong {
-    color: #a78bfa;
-    font-weight: 600;
 }
 
 /* ============================================
@@ -329,35 +216,118 @@
 }
 
 /* ============================================
+   ALTERNATE VIEWS (RASHI, NAKSHATRA, RAAGA)
+   ============================================ */
+
+.section-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.description {
+    font-size: 0.9rem;
+    color: var(--card-text-muted);
+    line-height: 1.5;
+}
+
+.tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.space-tag {
+    padding: 0.5rem 1.25rem;
+    background: var(--card-bg-alt);
+    border: 1px solid var(--button-border-soft);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--card-text);
+    cursor: pointer;
+    transition: background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+    backdrop-filter: blur(10px);
+}
+
+.space-tag:hover {
+    background: var(--tag-hover-bg);
+    border-color: var(--button-border-strong);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
+}
+
+.space-tag:active {
+    background: var(--tag-pressed-bg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.9);
+    transform: translateY(0);
+}
+
+/* ============================================
+   TYPOGRAPHY FOR VIEWS
+   ============================================ */
+
+.space-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(168, 184, 255, 0.8) 50%,
+            rgba(125, 211, 252, 0.7) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.poetic-subtitle {
+    font-size: 1rem;
+    color: var(--card-text-muted);
+    font-weight: 300;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+/* ============================================
    RESPONSIVE DESIGN
    ============================================ */
 
 @media (max-width: 768px) {
-    .planet-header-with-strength {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    .planet-header-simple {
+        gap: 0.5rem;
+        padding-bottom: 0.75rem;
     }
 
-    .planet-header-text {
-        align-items: center;
-    }
-
-    .degree-pill {
-        width: 100%;
-        text-align: center;
-        display: block;
-    }
-
-    .details-card-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .planet-name {
+    .planet-name-simple {
         font-size: 1.6rem;
     }
 
-    .detail-card {
-        justify-content: center;
+    .detail-row {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+        padding: 0.5rem;
+    }
+
+    .row-item {
+        gap: 0.2rem;
+        padding: 0.3rem;
+    }
+
+    .strength-bar-container {
+        gap: 0.4rem;
+    }
+
+    .strength-bar-label {
+        font-size: 0.75rem;
     }
 }
