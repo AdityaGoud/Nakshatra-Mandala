@@ -6,123 +6,36 @@
     gap: 1rem;
     width: 100%;
     height: 100%;
-    background: yellow;
 }
 
-/* --- PLANET LAYOUT --- */
-.planet-layout {
+/* PLANET LAYOUT */
+.planet-layout-redesign {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    background: yellow;
+    gap: 0;
+    padding: 0;
 }
 
-
-
-/* Header */
-.planet-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    background: yellow;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+/* PLANET TITLE */
+.planet-title-section {
+    text-align: center;
+    margin: 8px 0;
 }
 
-/* STRICT ICON FRAME (Fixes overflow issue) */
-.icon-frame {
-    width: 100px;
-    height: 100px;
-    //background: rgba(255, 255, 255, 0.05);
-    background: yellow;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: auto ;/* Crops image */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+.planet-name-gold {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fbbf24;
+    margin: 0;
 }
 
-.icon-frame img {
+/* PLANET IMAGE */
+.planet-image-large {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-}
-
-.planet-info-top {
-    text-align: right;
-    background: yellow;
-}
-
-.planet-name {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-    background: yellow;
-}
-
-.degree-pill {
-    font-family: monospace;
-    font-size: 0.9rem;
-    color: var(--accent);
-    //background: rgba(255, 255, 255, 0.05);
-    background: yellow;
-    padding: 2px 8px;
-    border-radius: 6px;
-    margin-top: 4px;
-    display: inline-block;
-}
-
-/* Stats Grid */
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-}
-
-.stat-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 4px;
-}
-
-.value {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.value.text-sm {
-    font-size: 0.95rem;
-}
-
-.sub {
-    font-size: 0.7rem;
-    font-style: italic;
-    opacity: 0.5;
-    margin-top: 2px;
-}
-
-.planet-desc {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: var(--card-text-muted);
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1rem;
-    border-radius: 12px;
-    text-align: center;
-    margin-top: auto;
+    margin: 0 auto;
+    border: 3px solid #d4a574;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
 }

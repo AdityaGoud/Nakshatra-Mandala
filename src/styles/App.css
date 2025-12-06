@@ -503,7 +503,9 @@ body {
     .info-panel {
         flex: none;
         width: 100%;
-        max-width: 420px;
+        max-width: 500px;
+        background: pink;
+        margin: 50px;
     }
 }
 

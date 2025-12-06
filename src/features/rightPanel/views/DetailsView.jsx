@@ -1,13 +1,13 @@
 // src/features/rightPanel/views/DetailsView.jsx
 import React from "react";
-import { MELAKARTA_RAGAS, NAKSHATRAS, RASHIS } from "../../../data/mandalaData";
-import { getPlanetDignity, getHouseNumber } from "../../../services/mappings";
+import {MELAKARTA_RAGAS, NAKSHATRAS, RASHIS} from "../../../data/mandalaData";
+import {getDashaForNakshatra} from "../../../data/dashaData";
 
-const DetailsView = ({ hoverSelection, chartData }) => {
+const DetailsView = ({hoverSelection, chartData}) => {
     if (!hoverSelection) {
         return (
             <div className="details-view empty-state">
-                <p className="poetic-subtitle" style={{textAlign:'center', marginTop:'2rem'}}>
+                <p className="poetic-subtitle" style={{textAlign: 'center', marginTop: '2rem'}}>
                     Hover over the mandala to explore the cosmic segments.
                 </p>
             </div>
@@ -16,91 +16,158 @@ const DetailsView = ({ hoverSelection, chartData }) => {
 
     // PLANET VIEW
     if (hoverSelection.type === "planet") {
-        const { name, degree } = hoverSelection;
-        const ascendantDeg = chartData?.rasi?.ascendantDeg || 0;
-        const dignity = getPlanetDignity(name, degree);
-        const houseNum = getHouseNumber(degree, ascendantDeg);
-        const rashiIndex = Math.floor(degree / 30) % 12;
-        const rashiName = RASHIS[rashiIndex];
-
-        let statusColor = "#fff";
-        if (dignity === "Exalted") statusColor = "#4ade80";
-        if (dignity === "Debilitated") statusColor = "#f87171";
-        if (dignity === "Own Sign") statusColor = "#60a5fa";
-
+        const {name, degree} = hoverSelection;
         const iconSrc = name === 'Jupiter' ? '/jupiter.ico' : `/${name.toLowerCase()}.png`;
 
         return (
-            <div className="details-view planet-layout">
-                {/* Top Header with Fixed Image */}
-                <div className="planet-header">
-                    <div className="planet-info-top">
-                        <h2 className="planet-name">{name}</h2>
-                        <span className="degree-pill">{degree.toFixed(2)}°</span>
-                    </div>
-                    <div className="icon-frame" style={{
-                        maxWidth: '600px',  // Set your desired max width
-                        overflow: 'hidden'
+            <div className="details-view planet-layout-redesign">
+                {/* PLANET NAME AND DEGREE */}
+                <div className="planet-title-section">
+                    <h2 className="planet-name-gold">{name} {degree.toFixed(2)}°</h2>
+                </div>
+
+                {/* PLANET IMAGE */}
+                <div className="planet-image-large">
+                    <img src={iconSrc} alt={name}
+                         style={{
+                            width: '100%', height: '100%', objectFit: 'cover'
+                        }}
+                    />
+                </div>
+
+
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <div className="grid-cell" style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '10px 14px',
+                        width: '200px',
+                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(147, 51, 234, 0.15))',
+                        border: '1px solid rgba(59, 130, 246, 0.3)',
+                        borderRadius: '8px',
+                        minHeight: '50px',
+                        flex: 1
                     }}>
-                        <img
-                            src={iconSrc}
-                            alt={name}
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'contain'  // Key property: fits image without cropping
-                            }}
-                        />
+                        <div className="cell-label" style={{
+                            fontSize: '13px',
+                            color: '#93c5fd',
+                            fontWeight: '500'
+                        }}>
+                            House Dignity
+                        </div>
+                        <div className="cell-value" style={{
+                            fontSize: '14px',
+                            color: '#fbbf24',
+                            fontWeight: '600'
+                        }}>
+                            ⬆️ Exalted
+                        </div>
+                    </div>
+                    <div className="grid-cell" style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '10px 14px',
+                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(147, 51, 234, 0.15))',
+                        border: '1px solid rgba(59, 130, 246, 0.3)',
+                        borderRadius: '8px',
+                        minHeight: '50px',
+                        flex: 1
+                    }}>
+                        <div className="cell-label" style={{
+                            fontSize: '13px',
+                            color: '#93c5fd',
+                            fontWeight: '500'
+                        }}>
+                            Rashi Dignity
+                        </div>
+                        <div className="cell-value" style={{
+                            fontSize: '14px',
+                            color: '#fbbf24',
+                            fontWeight: '600'
+                        }}>
+                            Neutral
+                        </div>
                     </div>
                 </div>
 
-                {/* Grid Stats */}
-                <div className="stats-grid">
-                    {/* 1. HOUSE: Changed structure slightly for horizontal box look */}
 
-                    {/* 2. Other cards remain the same... */}
-                    <div className="stat-card">
-                        <span className="label">Rashi</span>
-                        <div className="value text-sm">{rashiName}</div>
-                        <span className="sub">Sign</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="label">Dignity</span>
-                        <div className="value text-sm" style={{color: statusColor}}>{dignity}</div>
-                        <span className="sub">Status</span>
-                    </div>
-                    <div className="stat-card">
-                        <span className="label">Relation</span>
-                        <div className="value text-sm">Neutral</div>
-                        <span className="sub">Nature</span>
-                    </div>
-                </div>
-
-                {/* Description */}
-                <div className="planet-desc">
-                    {name} is in the <strong>{houseNum}<sup>th</sup> House</strong> ({rashiName}).
-                    It is currently {dignity}.
-                </div>
             </div>
         );
     }
 
-    // OTHER VIEWS (Rashi/Nak/Raga)
-    let title = "", sub = "", desc = "";
+    // RASHI VIEW
     if (hoverSelection.type === "rashi") {
-        title = RASHIS[hoverSelection.index]; sub = `Rashi #${hoverSelection.index+1}`; desc = "Zodiac Sign";
-    } else if (hoverSelection.type === "nakshatra") {
-        title = NAKSHATRAS[hoverSelection.index]; sub = `Nakshatra #${hoverSelection.index+1}`; desc = "Lunar Mansion";
-    } else if (hoverSelection.type === "raaga") {
-        title = MELAKARTA_RAGAS[hoverSelection.index]; sub = `Melakarta #${hoverSelection.index+1}`; desc = "Parent Raga";
+        const {index} = hoverSelection;
+        const rashi = RASHIS[index];
+        const details = {
+            "Sub": "Zodiac Sign",
+            "Overview": `${rashi} is a significant rashi in Vedic astrology. Planets here express themselves through its characteristic energies.`
+        };
+
+        return (
+            <div className="details-view">
+                <h2 className="space-title">{rashi}</h2>
+                <p className="poetic-subtitle">Zodiac House #{index + 1}</p>
+                <div className="section-label">Overview</div>
+                <p className="description">{details.Overview}</p>
+            </div>
+        );
+    }
+
+    // NAKSHATRA VIEW
+    if (hoverSelection.type === "nakshatra") {
+        const {index} = hoverSelection;
+        const nakshatra = NAKSHATRAS[index];
+        const dashaInfo = getDashaForNakshatra(index);
+        const {lord, details} = dashaInfo || {};
+
+        return (
+            <div className="details-view">
+                <h2 className="space-title">{nakshatra}</h2>
+                <p className="poetic-subtitle">Lunar Mansion #{index + 1}</p>
+
+                {lord && (
+                    <>
+                        <div className="section-label">Dasha Lord</div>
+                        <div className="tags-grid">
+                            <span className="space-tag">{lord}</span>
+                        </div>
+                    </>
+                )}
+
+                {details?.summary && (
+                    <>
+                        <div className="section-label">Overview</div>
+                        <p className="description">{details.summary}</p>
+                    </>
+                )}
+            </div>
+        );
+    }
+
+    // RAAGA VIEW
+    if (hoverSelection.type === "raaga") {
+        const {index} = hoverSelection;
+        const raaga = MELAKARTA_RAGAS[index];
+
+        return (
+            <div className="details-view">
+                <h2 className="space-title">{raaga}</h2>
+                <p className="poetic-subtitle">Melakarta #{index + 1}</p>
+                <p className="description">A beautiful raga in the Carnatic music tradition.</p>
+            </div>
+        );
     }
 
     return (
-        <div className="details-view">
-            <h2 className="space-title" style={{fontSize:'1.6rem'}}>{title}</h2>
-            <p className="poetic-subtitle">{sub}</p>
-            <div className="section-label" style={{marginTop:'1rem'}}>Overview</div>
-            <p className="description">{desc}</p>
+        <div className="details-view empty-state">
+            <p className="poetic-subtitle" style={{textAlign: 'center', marginTop: '2rem'}}>
+                Unknown selection type.
+            </p>
         </div>
     );
 };
