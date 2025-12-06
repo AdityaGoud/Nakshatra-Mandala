@@ -31,6 +31,10 @@ const DetailsView = ({ hoverSelection, chartData }) => {
         const dashaInfo = getDashaForNakshatra(nakshatraInfo.index);
         const nakshatraLord = dashaInfo?.lord || "Unknown";
 
+        // Calculate strength
+        const strengthData = calculatePlanetStrength(name, degree, houseNum, dignity);
+        const overallStrength = strengthData.overall_strength;
+
         let statusColor = "#fff";
         if (dignity === "Exalted") statusColor = "#4ade80";
         if (dignity === "Debilitated") statusColor = "#f87171";
@@ -40,99 +44,111 @@ const DetailsView = ({ hoverSelection, chartData }) => {
 
         return (
             <div className="details-view planet-layout">
-                {/* Top Header with Planet Name and Icon */}
-                <div className="planet-header">
-                    <div className="planet-info-top">
+                {/* HEADER SECTION: Planet Image + Strength Ring */}
+                <div className="planet-header-with-strength">
+                    <div className="planet-image-section">
+                        <div className="icon-frame">
+                            <img
+                                src={iconSrc}
+                                alt={name}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'contain'
+                                }}
+                            />
+                        </div>
+                        {/* Strength Ring Overlay */}
+                        <div className="strength-ring-overlay">
+                            <CircularStrengthIndicator strength={overallStrength} size={100} />
+                        </div>
+                    </div>
+
+                    <div className="planet-header-text">
                         <h2 className="planet-name">{name}</h2>
                         <span className="degree-pill">{degree.toFixed(2)}°</span>
                     </div>
-                    <div className="icon-frame">
-                        <img
-                            src={iconSrc}
-                            alt={name}
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'contain'
-                            }}
-                        />
+                </div>
+
+                {/* PRIMARY DETAILS ROW 1: House, Rashi, Dignity, Nakshatra */}
+                <div className="details-card-grid details-row-1">
+                    <div className="detail-card detail-card--primary detail-card--house">
+                        <div className="card-icon">🏠</div>
+                        <div className="card-content">
+                            <div className="card-value">{houseNum}</div>
+                            <div className="card-label">House</div>
+                        </div>
+                    </div>
+
+                    <div className="detail-card detail-card--primary detail-card--rashi">
+                        <div className="card-icon">♒</div>
+                        <div className="card-content">
+                            <div className="card-value">{rashiName}</div>
+                            <div className="card-label">Rashi</div>
+                        </div>
+                    </div>
+
+                    <div className="detail-card detail-card--primary detail-card--dignity">
+                        <div className="card-icon">⭐</div>
+                        <div className="card-content">
+                            <div className="card-value" style={{color: statusColor}}>{dignity}</div>
+                            <div className="card-label">Dignity</div>
+                        </div>
+                    </div>
+
+                    <div className="detail-card detail-card--primary detail-card--nakshatra">
+                        <div className="card-icon">🌙</div>
+                        <div className="card-content">
+                            <div className="card-value">{nakshatraInfo.name.split(" ")[0]}</div>
+                            <div className="card-label">Nakshatra</div>
+                        </div>
                     </div>
                 </div>
 
-                {/* PRIMARY STATS GRID - House, Rashi, Dignity, Navamsa */}
-                <div className="stats-grid">
-                    <div className="stat-card stat-primary">
-                        <span className="label">House</span>
-                        <div className="value">{houseNum}</div>
-                        <span className="sub">Position</span>
+                {/* SECONDARY DETAILS ROW 2: Lord, Navamsa, Awastha, Sthan */}
+                <div className="details-card-grid details-row-2">
+                    <div className="detail-card detail-card--secondary detail-card--lord">
+                        <div className="card-icon">👑</div>
+                        <div className="card-content">
+                            <div className="card-value">{nakshatraLord}</div>
+                            <div className="card-label">Nak. Lord</div>
+                        </div>
                     </div>
 
-                    <div className="stat-card stat-primary">
-                        <span className="label">Rashi</span>
-                        <div className="value text-sm">{rashiName}</div>
-                        <span className="sub">Sign</span>
+                    <div className="detail-card detail-card--secondary detail-card--navamsa">
+                        <div className="card-icon">◇</div>
+                        <div className="card-content">
+                            <div className="card-value">N/A</div>
+                            <div className="card-label">Navamsa</div>
+                        </div>
                     </div>
 
-                    <div className="stat-card stat-primary">
-                        <span className="label">Dignity</span>
-                        <div className="value text-sm" style={{color: statusColor}}>{dignity}</div>
-                        <span className="sub">Status</span>
+                    <div className="detail-card detail-card--secondary detail-card--awastha">
+                        <div className="card-icon">🔥</div>
+                        <div className="card-content">
+                            <div className="card-value">Pending</div>
+                            <div className="card-label">Awastha</div>
+                        </div>
                     </div>
 
-                    <div className="stat-card stat-primary">
-                        <span className="label">Navamsa</span>
-                        <div className="value text-sm">N/A</div>
-                        <span className="sub">D-9 Rashi</span>
-                    </div>
-                </div>
-
-                {/* NAKSHATRA SECTION */}
-                <div className="section-divider"></div>
-                <div className="section-header">
-                    <div className="section-title">Nakshatra Details</div>
-                </div>
-
-                <div className="nakshatra-info">
-                    <div className="nakshatra-name-box">
-                        <span className="nakshatra-label">Lunar Mansion</span>
-                        <h3 className="nakshatra-name">{nakshatraInfo.name}</h3>
-                        <span className="nakshatra-number">#{nakshatraInfo.number}</span>
-                    </div>
-                </div>
-
-                <div className="lord-card">
-                    <span className="lord-label">Nakshatra Lord</span>
-                    <div className="lord-badge">{nakshatraLord}</div>
-                </div>
-
-                {/* ADVANCED DETAILS SECTION */}
-                <div className="section-divider"></div>
-                <div className="advanced-grid">
-                    <div className="detail-box">
-                        <span className="detail-label">Awastha</span>
-                        <div className="detail-value">API Pending</div>
-                        <span className="detail-sub">State</span>
-                    </div>
-
-                    <div className="detail-box">
-                        <span className="detail-label">Sthan</span>
-                        <div className="detail-value">API Pending</div>
-                        <span className="detail-sub">Placement</span>
-                    </div>
-
-                    <div className="detail-box">
-                        <span className="detail-label">Aspects</span>
-                        <div className="detail-value">-</div>
-                        <span className="detail-sub">Grahas</span>
+                    <div className="detail-card detail-card--secondary detail-card--sthan">
+                        <div className="card-icon">📍</div>
+                        <div className="card-content">
+                            <div className="card-value">Pending</div>
+                            <div className="card-label">Sthan</div>
+                        </div>
                     </div>
                 </div>
 
                 {/* INTERPRETATION SUMMARY */}
-                <div className="planet-desc">
-                    <strong>{name}</strong> resides in <strong>{houseNum}<sup>th</sup> House</strong> ({rashiName})
-                    within <strong>{nakshatraInfo.name}</strong> Nakshatra,
-                    ruled by <strong>{nakshatraLord}</strong>.
-                    Currently <strong>{dignity}</strong>.
+                <div className="interpretation-box">
+                    <div className="interpretation-title">Snapshot</div>
+                    <p className="interpretation-text">
+                        <strong>{name}</strong> in <strong>{houseNum}<sup>th</sup> House</strong>
+                        ({rashiName}) • <strong>{nakshatraInfo.name}</strong>
+                        ruled by <strong>{nakshatraLord}</strong> • <strong>{dignity}</strong>
+                        with <strong>{overallStrength}%</strong> strength
+                    </p>
                 </div>
             </div>
         );
