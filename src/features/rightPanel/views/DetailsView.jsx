@@ -3,6 +3,8 @@ import React from "react";
 import { MELAKARTA_RAGAS, NAKSHATRAS, RASHIS } from "../../../data/mandalaData";
 import { getPlanetDignity, getHouseNumber, getNakshatraInfoFromDegree } from "../../../services/mappings";
 import { getDashaForNakshatra } from "../../../data/dashaData";
+import { calculatePlanetStrength } from "../../../services/astrologyStrengthCalculator";
+import CircularStrengthIndicator from "../components/CircularStrengthIndicator";
 
 const DetailsView = ({ hoverSelection, chartData }) => {
     if (!hoverSelection) {
