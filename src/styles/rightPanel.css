@@ -1,4 +1,4 @@
-/* src/styles/RightPanel.css */
+/* src/styles/rightPanel.css - Cosmic Theme Styling */
 
 .details-view {
     display: flex;
@@ -6,7 +6,6 @@
     gap: 1rem;
     width: 100%;
     height: 100%;
-    background: yellow;
 }
 
 /* --- PLANET LAYOUT --- */
@@ -14,68 +13,76 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    background: yellow;
 }
 
-
-
-/* Header */
+/* HEADER - Planet Name & Icon */
 .planet-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    background: yellow;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* STRICT ICON FRAME (Fixes overflow issue) */
-.icon-frame {
-    width: 100px;
-    height: 100px;
-    //background: rgba(255, 255, 255, 0.05);
-    background: yellow;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: auto ;/* Crops image */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.icon-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.2);
 }
 
 .planet-info-top {
-    text-align: right;
-    background: yellow;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: column;
 }
 
 .planet-name {
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
-    background: yellow;
+    background: linear-gradient(135deg, #7dd3fc 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .degree-pill {
     font-family: monospace;
-    font-size: 0.9rem;
-    color: var(--accent);
-    //background: rgba(255, 255, 255, 0.05);
-    background: yellow;
-    padding: 2px 8px;
-    border-radius: 6px;
-    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #7dd3fc;
+    background: rgba(125, 211, 252, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(125, 211, 252, 0.3);
     display: inline-block;
+    margin-top: 0.25rem;
 }
 
-/* Stats Grid */
+/* ICON FRAME */
+.icon-frame {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    border: 2px solid rgba(125, 211, 252, 0.3);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(125, 211, 252, 0.15),
+                inset 0 0 12px rgba(125, 211, 252, 0.05);
+    transition: all 0.3s ease;
+}
+
+.icon-frame:hover {
+    box-shadow: 0 8px 32px rgba(125, 211, 252, 0.25),
+                inset 0 0 16px rgba(125, 211, 252, 0.1);
+    transform: scale(1.05);
+}
+
+.icon-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* PRIMARY STATS GRID - 2x2 layout */
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -83,26 +90,49 @@
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.04) 0%, rgba(168, 85, 247, 0.04) 100%);
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-top: 3px solid rgba(125, 211, 252, 0.4);
     border-radius: 12px;
     padding: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+    border-color: rgba(125, 211, 252, 0.35);
+    box-shadow: 0 4px 12px rgba(125, 211, 252, 0.1);
+}
+
+.stat-card.stat-primary:nth-child(2) {
+    border-top-color: rgba(59, 130, 246, 0.4);
+}
+
+.stat-card.stat-primary:nth-child(3) {
+    border-top-color: rgba(168, 85, 247, 0.4);
+}
+
+.stat-card.stat-primary:nth-child(4) {
+    border-top-color: rgba(236, 72, 153, 0.4);
 }
 
 .label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 6px;
+    font-weight: 500;
 }
 
 .value {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: #fff;
+    margin: 2px 0;
 }
 
 .value.text-sm {
@@ -110,19 +140,163 @@
 }
 
 .sub {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-style: italic;
-    opacity: 0.5;
+    color: rgba(255, 255, 255, 0.45);
     margin-top: 2px;
 }
 
+/* SECTION DIVIDER */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.3), transparent);
+    margin: 0.5rem 0;
+}
+
+/* SECTION HEADER */
+.section-header {
+    margin-top: 0.5rem;
+}
+
+.section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(125, 211, 252, 0.8);
+}
+
+/* NAKSHATRA INFO SECTION */
+.nakshatra-info {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.nakshatra-name-box {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(125, 211, 252, 0.04) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-left: 3px solid rgba(168, 85, 247, 0.5);
+    border-radius: 12px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nakshatra-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+}
+
+.nakshatra-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    color: #a78bfa;
+}
+
+.nakshatra-number {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
+/* NAKSHATRA LORD CARD */
+.lord-card {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(125, 211, 252, 0.04) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 12px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lord-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+}
+
+.lord-badge {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: #60a5fa;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* ADVANCED DETAILS GRID - 3 columns */
+.advanced-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+}
+
+.detail-box {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    border-top: 2px solid rgba(236, 72, 153, 0.4);
+    border-radius: 10px;
+    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.detail-box:hover {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(168, 85, 247, 0.08) 100%);
+    border-color: rgba(236, 72, 153, 0.35);
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.1);
+}
+
+.detail-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.4px;
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 2px 0;
+}
+
+.detail-sub {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* PLANET DESCRIPTION / INTERPRETATION */
 .planet-desc {
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.6;
     color: var(--card-text-muted);
-    background: rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.06) 0%, rgba(168, 85, 247, 0.06) 100%);
+    border: 1px solid rgba(125, 211, 252, 0.15);
+    border-left: 3px solid rgba(125, 211, 252, 0.4);
     padding: 1rem;
     border-radius: 12px;
     text-align: center;
-    margin-top: auto;
+    margin-top: 0.5rem;
+}
+
+.planet-desc strong {
+    color: #a78bfa;
+    font-weight: 600;
 }
