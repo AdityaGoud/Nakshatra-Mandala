@@ -1,14 +1,172 @@
 /* src/styles/RightPanel.css */
 
+/* ============================================
+   OUTERBOX (Root Container - .info-panel)
+   Fixed to viewport at 85vh height, 30vw width
+   ============================================ */
+.info-panel {
+    /* Position: Fixed to viewport, stays in place during scroll */
+    position: fixed;
+    top: 7vh; /* 7% gap from top of screen */
+    right: 2vw; /* 2% gap from right edge */
+
+    /* Size: Viewport-based units (adapts to any screen size) */
+    height: 85vh; /* 85% of viewport height */
+    width: 30vw; /* 30% of viewport width */
+
+    /* Layout: Flexbox container for vertical child stacking */
+    display: flex;
+    flex-direction: column;
+
+    /* Visual styling */
+    color: var(--card-text);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 2.5rem 2rem 2rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+
+    /* Box model: Include padding/border in total width/height */
+    box-sizing: border-box;
+
+    /* Overflow: Hide at root level, children handle scrolling */
+    overflow: hidden;
+
+    /* Smooth transitions for element changes */
+    transition: background 0.6s ease-in-out,
+    border-color 0.6s ease-in-out,
+    box-shadow 0.6s ease-in-out;
+}
+
+/* ============================================
+   INNERBOX-1 (Header Section - .panel-header)
+   Top section with title and navigation
+   ============================================ */
+.panel-header {
+    flex: 0 0 auto;
+    max-height: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--card-border);
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   INNERBOX-2 (Main Content - .panel-content)
+   Bottom section with scrollable content
+   ============================================ */
+.panel-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 1rem;
+    box-sizing: border-box;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   INNERBOX-1.1 (Title and Button Row)
+   ============================================ */
+.innerbox-1-1 {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   INNERBOX-1.2 (Tab Navigation)
+   ============================================ */
+.innerbox-1-2 {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   INNERBOX-2.1 (Fixed Height Card - 30%)
+   ============================================ */
+.innerbox-2-1 {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* ============================================
+   INNERBOX-2.2 (Flexible Height Area - 70%)
+   ============================================ */
+.innerbox-2-2 {
+    flex: 1;
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   INNERBOX-2.1.1 & 2.1.2 (Cards inside Fixed Card)
+   ============================================ */
+.innerbox-2-1-1,
+.innerbox-2-1-2 {
+    flex: 0 0 auto;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   INNERBOX-2.2.1 (Scrollable List)
+   ============================================ */
+.innerbox-2-2-1 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   COMPONENT-SPECIFIC STYLES
+   ============================================ */
+
+/* Details View Container */
 .details-view {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     width: 100%;
     height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
-/* PLANET LAYOUT */
+/* Planet Layout */
 .planet-layout-redesign {
     display: flex;
     flex-direction: column;
@@ -16,7 +174,7 @@
     padding: 0;
 }
 
-/* PLANET TITLE */
+/* Planet Title */
 .planet-title-section {
     text-align: center;
     margin: 8px 0;
@@ -29,7 +187,7 @@
     margin: 0;
 }
 
-/* PLANET IMAGE */
+/* Planet Image */
 .planet-image-large {
     width: 100%;
     height: 100%;
@@ -38,4 +196,219 @@
     border-radius: 8px;
     overflow: hidden;
     background: #000;
+}
+
+/* ============================================
+   ELEMENTAL BACKGROUND THEMES
+   Immersive environments with layered effects
+   ============================================ */
+
+/* Fire Element - Intense burning environment */
+.info-panel.element-fire {
+    background: radial-gradient(ellipse at 50% 120%, rgba(255, 69, 0, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 100%, rgba(220, 38, 38, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 100%, rgba(234, 88, 12, 0.25) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(139, 0, 0, 0.35) 0%, rgba(220, 38, 38, 0.25) 30%, var(--card-bg) 100%);
+    border-color: rgba(255, 69, 0, 0.8);
+    box-shadow: 0 25px 60px rgba(220, 38, 38, 0.6),
+    inset 0 -100px 80px rgba(255, 69, 0, 0.15),
+    0 0 100px rgba(255, 140, 0, 0.3);
+}
+
+/* Fire glow animation */
+.info-panel.element-fire::before {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    right: -10%;
+    height: 60%;
+    background: radial-gradient(ellipse at 50% 100%, rgba(255, 69, 0, 0.4) 0%, transparent 70%);
+    animation: fireGlow 3s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes fireGlow {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* Water Element - Deep ocean environment */
+.info-panel.element-water {
+    background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(96, 165, 250, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 50% 30%, rgba(147, 197, 253, 0.15) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(96, 165, 250, 0.2) 50%, var(--card-bg) 100%);
+    border-color: rgba(59, 130, 246, 0.9);
+    box-shadow: 0 25px 60px rgba(59, 130, 246, 0.5),
+    inset 0 0 100px rgba(96, 165, 250, 0.2),
+    0 0 80px rgba(147, 197, 253, 0.3);
+}
+
+/* Water ripple effect */
+.info-panel.element-water::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 70% 70%, rgba(96, 165, 250, 0.15) 0%, transparent 35%);
+    animation: waterRipple 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes waterRipple {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.3;
+    }
+}
+
+/* Earth Element - Forest/nature environment */
+.info-panel.element-earth {
+    background: radial-gradient(ellipse at 80% 20%, rgba(34, 197, 94, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 60%, rgba(101, 163, 13, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 90%, rgba(22, 163, 74, 0.15) 0%, transparent 40%),
+    linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(101, 163, 13, 0.18) 50%, var(--card-bg) 100%);
+    border-color: rgba(34, 197, 94, 0.8);
+    box-shadow: 0 25px 60px rgba(34, 197, 94, 0.5),
+    inset 0 0 80px rgba(101, 163, 13, 0.15),
+    0 0 60px rgba(34, 197, 94, 0.3);
+}
+
+/* Earth particle shimmer */
+.info-panel.element-earth::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(2px 2px at 15% 25%, rgba(34, 197, 94, 0.4), transparent),
+    radial-gradient(2px 2px at 85% 75%, rgba(101, 163, 13, 0.4), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(34, 197, 94, 0.3), transparent);
+    background-size: 100px 100px;
+    animation: earthShimmer 8s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes earthShimmer {
+    0% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0.8;
+        transform: translateY(-100px);
+    }
+}
+
+/* Air Element - Windy atmosphere */
+.info-panel.element-air {
+    background: linear-gradient(90deg, transparent 0%, rgba(147, 197, 253, 0.15) 50%, transparent 100%),
+    radial-gradient(ellipse at 30% 30%, rgba(191, 219, 254, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(147, 197, 253, 0.18) 0%, transparent 55%),
+    linear-gradient(135deg, rgba(147, 197, 253, 0.25) 0%, rgba(191, 219, 254, 0.2) 50%, var(--card-bg) 100%);
+    border-color: rgba(147, 197, 253, 0.8);
+    box-shadow: 0 25px 60px rgba(147, 197, 253, 0.5),
+    inset 0 0 100px rgba(191, 219, 254, 0.2),
+    0 0 80px rgba(147, 197, 253, 0.3);
+}
+
+/* Air flow effect */
+.info-panel.element-air::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(147, 197, 253, 0.15) 25%,
+            rgba(191, 219, 254, 0.2) 50%,
+            rgba(147, 197, 253, 0.15) 75%,
+            transparent 100%
+    );
+    animation: airFlow 6s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes airFlow {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(33.33%);
+    }
+}
+
+/* Ether Element - Mystical cosmic energy */
+.info-panel.element-ether {
+    background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 20% 30%, rgba(192, 132, 252, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.18) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(236, 72, 153, 0.2) 50%, var(--card-bg) 100%);
+    border-color: rgba(168, 85, 247, 0.9);
+    box-shadow: 0 25px 60px rgba(168, 85, 247, 0.6),
+    inset 0 0 120px rgba(192, 132, 252, 0.25),
+    0 0 100px rgba(236, 72, 153, 0.4);
+}
+
+/* Ether cosmic energy pulse */
+.info-panel.element-ether::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+    animation: etherPulse 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes etherPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+/* ============================================
+   RESPONSIVE: Mobile/Tablet (< 1200px)
+   ============================================ */
+@media (max-width: 1200px) {
+    .info-panel {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        height: auto;
+        min-height: 60vh;
+        padding: 2rem 1.5rem;
+    }
 }

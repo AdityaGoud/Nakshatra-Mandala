@@ -27,6 +27,9 @@ const MandalaContainer = ({chartData, onBack}) => {
         ACTIVE_CHART_TYPES.RASI
     );
 
+    // NEW: Track clicked planet for background change
+    const [clickedPlanet, setClickedPlanet] = useState(null);
+
     // Which tab is currently active on the right panel
     const [activeTab, setActiveTab] = useState(RIGHT_PANEL_TABS.DETAILS);
 
@@ -75,6 +78,7 @@ const MandalaContainer = ({chartData, onBack}) => {
                         ascendantDeg={ascendantDeg}
                         planetPositions={planetPositions}
                         onHoverChange={setHoverSelection}
+                        onPlanetClick={setClickedPlanet}
                     />
                 </div>
             </div>
@@ -85,6 +89,7 @@ const MandalaContainer = ({chartData, onBack}) => {
                 hoverSelection={hoverSelection}
                 activeChartType={activeChartType}
                 onChartTypeChange={setActiveChartType}
+                clickedPlanet={clickedPlanet}
                 activeTab={activeTab}
                 onTabChange={setActiveTab}
                 onBack={onBack}

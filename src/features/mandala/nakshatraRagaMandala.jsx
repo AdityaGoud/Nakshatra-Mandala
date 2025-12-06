@@ -13,7 +13,7 @@ import {
 /**
  * NakshatraRagaMandala
  * Direction: ANTICLOCKWISE
- * Features: Planet Hover Support, Click-to-Lock Selection
+ * Features: Planet Hover Support, Click-to-Lock Selection, Planet Click Detection
  * Optimization: Separated Draw Logic from Event Logic to prevent listener thrashing
  */
 
@@ -45,6 +45,7 @@ const NakshatraRagaMandala = ({
                                   ascendantDeg = 96,
                                   planetPositions = [],
                                   onHoverChange,
+                                  onPlanetClick
                               }) => {
     const canvasRef = useRef(null);
 
@@ -394,14 +395,22 @@ const NakshatraRagaMandala = ({
 
         const handleClick = (e) => {
             const currentLock = isLockedRef.current;
+            const clickedItem = getHitData(e);
+
+            // Check if a planet was clicked and trigger callback
+            if (clickedItem?.type === "planet" && onPlanetClick) {
+                onPlanetClick({
+                    name: clickedItem.name,
+                    degree: clickedItem.degree
+                });
+            }
 
             if (currentLock) {
                 // UNLOCK
                 setIsLocked(false);
                 // Immediately update selection to what's under cursor
-                const newHovered = getHitData(e);
-                setHoveredSegment(newHovered);
-                if (onHoverChange) onHoverChange(newHovered);
+                setHoveredSegment(clickedItem);
+                if (onHoverChange) onHoverChange(clickedItem);
             } else {
                 // LOCK
                 setIsLocked(true);
@@ -424,7 +433,7 @@ const NakshatraRagaMandala = ({
             canvas.removeEventListener("click", handleClick);
             canvas.removeEventListener("mouseleave", handleMouseLeave);
         };
-    }, [ascendantDeg, onHoverChange]); // No dependency on hoveredSegment or isLocked
+    }, [ascendantDeg, onHoverChange, onPlanetClick]);
 
     return <canvas ref={canvasRef} style={{ cursor: "pointer" }} />;
 };

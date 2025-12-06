@@ -20,7 +20,7 @@ const TabNavigation = ({activeTab, onTabChange}) => {
     const tabs = [
         {key: RIGHT_PANEL_TABS.DETAILS, label: "Details"},
         {key: RIGHT_PANEL_TABS.DASHA, label: "Dasha"},
-        {key: RIGHT_PANEL_TABS.NAVAMSA, label: "Navamsa"},
+        {key: RIGHT_PANEL_TABS.NAVAMSA, label: "Divisional"},
     ];
 
     return (
