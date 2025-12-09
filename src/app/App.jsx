@@ -5,7 +5,7 @@ import OnboardingContainer from "../features/onboarding/OnboardingContainer";
 import MandalaContainer from "../features/mandala/MandalaContainer";
 
 // --- REQUIRED FOR DEV MODE ---
-import { createMockChartFromForm } from "../data/mockChartData";
+//import { createMockChartFromForm } from "../data/mockChartData";
 
 const App = () => {
     // =========================================================
