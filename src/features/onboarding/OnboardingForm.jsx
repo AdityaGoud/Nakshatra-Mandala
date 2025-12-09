@@ -1,28 +1,7 @@
-// src/features/onboarding/OnboardingForm.jsx
-
+// src/features/onboarding/components/OnboardingForm.jsx
 import React from "react";
+import {logger} from "../../utils/logger";
 
-/**
- * OnboardingForm
- *
- * Presentational/dumb component.
- * Responsibilities:
- * - Render the birth details form UI (inputs, labels, button).
- * - Display loading and error states from props.
- * - Call the provided callbacks when user changes fields or submits.
- *
- * It does NOT:
- * - Manage its own state (values come from props).
- * - Call any APIs directly.
- *
- * Props:
- * - step: string (currently only "single_screen", kept for future multi-step)
- * - values: { name, date, time, place, timezone }
- * - isSubmitting: boolean
- * - error: string | null
- * - onChange: (field, value) => void
- * - onSubmit: () => void
- */
 
 const OnboardingForm = ({
                             step,
@@ -32,13 +11,21 @@ const OnboardingForm = ({
                             onChange,
                             onSubmit,
                         }) => {
+
     const handleInputChange = (field) => (e) => {
+        logger.log('INPUT', field, { value: e.target.value }, 'FORM');
         onChange(field, e.target.value);
     };
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        onSubmit();
+        logger.log('SUBMIT', 'Form submit clicked', values, 'FORM');
+
+        if (onSubmit) {
+            onSubmit();
+        } else {
+            logger.log('ERROR', 'onSubmit prop missing', null, 'FORM');
+        }
     };
 
     return (
@@ -52,6 +39,7 @@ const OnboardingForm = ({
             </p>
 
             <form className="onboarding-form" onSubmit={handleFormSubmit}>
+
                 <div className="form-group">
                     <label className="form-label">Name (optional)</label>
                     <input
@@ -100,17 +88,14 @@ const OnboardingForm = ({
                 </div>
 
                 <div className="form-group">
-                    <label className="form-label">Timezone</label>
+                    <label className="form-label">Timezone (e.g. 5.5)</label>
                     <input
                         type="text"
                         className="form-input"
-                        placeholder="Asia/Kolkata"
+                        placeholder="e.g. 5.5 for India"
                         value={values.timezone}
                         onChange={handleInputChange("timezone")}
                     />
-                    {/* FUTURE:
-             Replace this simple text input with a proper timezone selector
-             or automatically detect timezone from place via backend service. */}
                 </div>
 
                 {error && <div className="form-error">{error}</div>}
@@ -123,8 +108,6 @@ const OnboardingForm = ({
                     {isSubmitting ? "Calculating chart..." : "Generate Mandala"}
                 </button>
 
-                {/* FUTURE:
-           You can add helper text here about privacy, accuracy, etc. */}
             </form>
         </div>
     );

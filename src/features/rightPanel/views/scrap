@@ -1,0 +1,114 @@
+<div className="details-view planet-layout">
+                {/* PLANET HEADER - Centered image, name, degree */}
+                <div className="planet-header-simple">
+                    <div className="planet-image-box">
+                        <div className="icon-frame-simple">
+                            <img
+                                src={iconSrc}
+                                alt={name}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'contain'
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className="planet-header-text-simple">
+                        <h2 className="planet-name-simple">{name}</h2>
+                        <span className="degree-pill-simple">{degree.toFixed(2)}°</span>
+                    </div>
+                </div>
+
+                {/* STRENGTH BAR SECTION */}
+                <div className="strength-bar-section">
+                    <HorizontalStrengthBar strength={overallStrength} />
+                </div>
+
+                {/* DETAILED INFORMATION GRID - Table style with rows */}
+                <div className="details-table">
+                    {/* Row 1: House | House Lord */}
+                    <div className="detail-row">
+                        <div className="row-item">
+                            <div className="row-item-label">House</div>
+                            <div className="row-item-value">{houseNum}</div>
+                        </div>
+                        <div className="row-item">
+                            <div className="row-item-label">House Lord</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                    </div>
+
+                    {/* Row 2: House Dignity | Rashi */}
+                    <div className="detail-row">
+                        <div className="row-item">
+                            <div className="row-item-label">House Dignity</div>
+                            <div className="row-item-value">{statusLabel}</div>
+                        </div>
+                        <div className="row-item">
+                            <div className="row-item-label">Rashi</div>
+                            <div className="row-item-value">{rashiName}</div>
+                        </div>
+                    </div>
+
+                    {/* Row 3: Rashi Dignity | Ruling Planet */}
+                    <div className="detail-row">
+                        <div className="row-item">
+                            <div className="row-item-label">Rashi Dignity</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                        <div className="row-item">
+                            <div className="row-item-label">Ruling Planet</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                    </div>
+
+                    {/* Row 4: Nakshatra | Nakshatra Lord */}
+                    <div className="detail-row">
+                        <div className="row-item">
+                            <div className="row-item-label">Nakshatra</div>
+                            <div className="row-item-value">{nakshatraInfo.name} - Pada {pada}</div>
+                        </div>
+                        <div className="row-item">
+                            <div className="row-item-label">Nak. Lord</div>
+                            <div className="row-item-value">{nakshatraLord}</div>
+                        </div>
+                    </div>
+
+                    {/* Row 5: Nak. Lord Rashi | House */}
+                    <div className="detail-row">
+                        <div className="row-item">
+                            <div className="row-item-label">Nak. Lord Rashi</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                        <div className="row-item">
+                            <div className="row-item-label">House</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                    </div>
+
+                    {/* Row 6: D9 Rashi | D9 House */}
+                    <div className="detail-row">
+                        <div className="row-item">
+                            <div className="row-item-label">D9 Rashi</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                        <div className="row-item">
+                            <div className="row-item-label">D9 House</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                    </div>
+
+                    {/* Row 7: Awastha | Aspects */}
+                    <div className="detail-row">
+                        <div className="row-item">
+                            <div className="row-item-label">Awastha</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                        <div className="row-item">
+                            <div className="row-item-label">Aspects</div>
+                            <div className="row-item-value pending">API Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </div>

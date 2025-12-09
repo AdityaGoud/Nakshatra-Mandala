@@ -1,77 +1,74 @@
 // src/features/mandala/MandalaContainer.jsx
-
-import React, {useMemo, useState} from "react";
-import {ACTIVE_CHART_TYPES, RIGHT_PANEL_TABS} from "./mandala.types";
+import React, { useMemo, useState, useEffect } from "react";
+import { ACTIVE_CHART_TYPES, RIGHT_PANEL_TABS } from "./mandala.types";
 import NakshatraRagaMandala from "./nakshatraRagaMandala";
 import RightPanelContainer from "../rightPanel/RightPanelContainer";
+import {logger} from "../../utils/logger";
+import SaturnBackground from '../../data/SaturnBackgroung.png'
 
-/**
- * MandalaContainer
- *
- * Container component for the main "Mandala" screen (Step 2).
- * Responsibilities:
- * - Receive full `chartData` from app (rasi, navamsa, metadata).
- * - Decide which chart type is active (Rasi vs Navamsa).
- * - Derive the planet positions and ascendant degree to feed the canvas.
- * - Hold hover state from the mandala and pass it into the right panel.
- * - Provide a "Back" action to return to the onboarding screen.
- *
- * Presentational components used:
- * - NakshatraRagaMandala: draws the circular mandala on <canvas>.
- * - RightPanelContainer: tabbed views (Details / Dasha / Navamsa).
- */
+// When your component mounts or renders:
+// Set the CSS variable on a parent element, maybe document.documentElement or the component container ref
+document.documentElement.style.setProperty('--saturn-bg-image', `url(${SaturnBackground})`);
 
-const MandalaContainer = ({chartData, onBack}) => {
-    // Which chart is currently visualized in the mandala: "rasi" | "navamsa"
-    const [activeChartType, setActiveChartType] = useState(
-        ACTIVE_CHART_TYPES.RASI
-    );
 
-    // NEW: Track clicked planet for background change
+const MandalaContainer = ({ chartData, onBack }) => {
+    const [activeChartType, setActiveChartType] = useState(ACTIVE_CHART_TYPES.RASI);
     const [clickedPlanet, setClickedPlanet] = useState(null);
-
-    // Which tab is currently active on the right panel
     const [activeTab, setActiveTab] = useState(RIGHT_PANEL_TABS.DETAILS);
-
-    // What segment / element in the mandala is currently hovered
     const [hoverSelection, setHoverSelection] = useState(null);
 
-    /**
-     * Derive planet positions and ascendant for the currently active chart.
-     * This keeps the canvas component "dumb" – it just draws what it receives.
-     *
-     * Expected `chartData` shape (you will refine with real API):
-     * {
-     *   rasi: {
-     *     ascendantDeg: number,
-     *     planets: PlanetPosition[],
-     *   },
-     *   navamsa?: {
-     *     ascendantDeg: number,
-     *     planets: PlanetPosition[],
-     *   },
-     *   meta: { ... }
-     * }
-     */
-    const {ascendantDeg, planetPositions} = useMemo(() => {
+    logger.log('INIT', 'MandalaContainer mounted', null, 'MANDALA');
+
+    // Track state changes
+    useEffect(() => {
+        if (hoverSelection) logger.log('HOVER', hoverSelection.type, hoverSelection, 'MANDALA');
+    }, [hoverSelection]);
+
+    useEffect(() => {
+        if (clickedPlanet) logger.log('PLANET', clickedPlanet.name, null, 'MANDALA');
+    }, [clickedPlanet]);
+
+    const { ascendantDeg, planetPositions } = useMemo(() => {
         if (!chartData) {
-            return {ascendantDeg: 0, planetPositions: []};
+            logger.log('DATA', 'No chartData', null, 'MANDALA');
+            return { ascendantDeg: 0, planetPositions: [] };
         }
 
-        const current =
-            activeChartType === ACTIVE_CHART_TYPES.NAVAMSA
-                ? chartData.navamsa || chartData.rasi
-                : chartData.rasi;
+        const current = activeChartType === ACTIVE_CHART_TYPES.NAVAMSA
+            ? chartData.navamsa || chartData.rasi
+            : chartData.rasi;
 
-        return {
+        const result = {
             ascendantDeg: current?.ascendantDeg ?? 0,
             planetPositions: current?.planets ?? [],
         };
+
+        logger.log('CALC', `Chart: ${activeChartType}`, {
+            ascendantDeg: result.ascendantDeg,
+            planetCount: result.planetPositions.length
+        }, 'MANDALA');
+
+        return result;
     }, [chartData, activeChartType]);
 
+    const handleChartTypeChange = (type) => {
+        logger.log('CHART', `Type: ${type}`, null, 'MANDALA');
+        setActiveChartType(type);
+    };
+
+    const handleTabChange = (tab) => {
+        logger.log('TAB', `Tab: ${tab}`, null, 'MANDALA');
+        setActiveTab(tab);
+    };
+
+    logger.log('RENDER', 'Mandala rendering', {
+        hover: hoverSelection?.type,
+        planet: clickedPlanet?.name
+    }, 'MANDALA');
+
     return (
+
         <div className="main-layout">
-            {/* Left: Mandala canvas */}
             <div className="mandala-container">
                 <div className="mandala-wrapper">
                     <NakshatraRagaMandala
@@ -83,15 +80,14 @@ const MandalaContainer = ({chartData, onBack}) => {
                 </div>
             </div>
 
-            {/* Right: Tabbed info panel */}
             <RightPanelContainer
                 chartData={chartData}
                 hoverSelection={hoverSelection}
                 activeChartType={activeChartType}
-                onChartTypeChange={setActiveChartType}
+                onChartTypeChange={handleChartTypeChange}
                 clickedPlanet={clickedPlanet}
                 activeTab={activeTab}
-                onTabChange={setActiveTab}
+                onTabChange={handleTabChange}
                 onBack={onBack}
             />
         </div>
